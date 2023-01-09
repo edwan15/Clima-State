@@ -20,11 +20,9 @@ function App() {
   
   const [city, setCity] = useState("");
   const [forecast, setForecast] = useState([]);
-  const [loading, setloading] = useState(false);
   useEffect(() => {
     dispatch(() => ClimaThunk(""));
-    
-  }, []);
+  }, [dispatch]);
 
  
     var today = new Date();
@@ -37,12 +35,10 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setloading(true);
     axios.get(URL).then((response) => {
       setForecast(response.data);
       console.log(response.data);
       dispatch(ClimaThunk(city));
-      setloading(false);
     });
   };
 
